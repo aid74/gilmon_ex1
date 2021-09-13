@@ -39,6 +39,8 @@ $app = new App($items, $productFactory);
 
 `phpunit`
 
+or
+
 `php composer.phar run-script test`
 `php composer.phar run-script tests`
 `php composer.phar run-script test-coverage`
@@ -46,35 +48,34 @@ $app = new App($items, $productFactory);
 ### Description
 
 Test  [Gilmon](https://gilmon.ru).
-Это было весело, но заняло немного больше времени, чем я планировал.
-В работе были применены следующие паттерны:
+The following patterns were applied in the work:
 
-- **Абстрактная фабрика** создание `Products` (своего рода implements `Items`, т.к. по условию `Items` финализированный класс)
-- **Декоратор** для `Products` с помощью него  значения `Item` можно изменять.
-- **Команда** для изменения `Item` значений согласно заданным правилам.
+- ** Abstract factory ** creation of `Products` (a kind of implements` Items`, since the `Items` condition is a finalized class)
+- ** Decorator ** for `Products` with it, the value of` Item` can be changed.
+- ** Command ** to change `Item` values according to the specified rules. 
 
 ### Product
 
-Все значения `Product` м.б. установлены динамически.
-- Свойства
-  - const `name`. Имя по которому `ProductFactory` будет идентифицировать `Product`. **Default:** `empty`
-  - `max_quality`. Максимальное значение качества (quality). **Default:** `50`
-  - `min_quality`. Минимальное значение (quality). **Default:** `0`
-  - `quality_step`. Определяет направление и скорость изменения параметра качества (quality). **Default:** `-1`
-  - `day_range_multiplier`. Определяет зависимость качества товара от дней до реализации товара.
-   **Default:** `[0 => 2]` это означает, что после даты продажи (0) скорость падения качества возрастает двукратно (2).
-- Публичные методы  
-  - `update`. Обновление `Item` для нового отрезка времени (дня по-умолчанию).
-  - `getItem`. Возвращает связанную с этим продуктом `Item`.
-  - `getMaxQuality`. getter для `max_quality` 
-  - `getMinQuality` . getter для `min_quality`
-  - `getQualityStep`. Возвращает шаг качества (quality) с учетом множителей.
-  - `getNewQuality`. Возвращает качество (quality), которое будет у `Product`-а в новый день.
-  - `isAfterSale`. Возвращает информацию о том продан продукт до или после дня истечения срока годности
+All values of `Product` can be used. installed dynamically.
+- Properties
+  - const `name`. The name by which `ProductFactory` will identify` Product`. ** Default: ** `empty`
+  - `max_quality`. The maximum quality value. ** Default: ** `50`
+  - `min_quality`. The minimum value (quality). ** Default: ** `0`
+  - `quality_step`. Determines the direction and rate of change for the quality parameter. ** Default: ** `-1`
+  - `day_range_multiplier`. Determines the dependence of the quality of the goods from the days before the sale of the goods.
+   ** Default: ** `[0 => 2]` this means that after the date of sale (0) the rate of decline in quality doubles (2).
+- Public methods
+  - `update`. Updating `Item` for a new time period (day by default).
+  - `getItem`. Returns the `Item` associated with this product.
+  - `getMaxQuality`. getter for `max_quality`
+  - `getMinQuality`. getter for `min_quality`
+  - `getQualityStep`. Returns the quality step with multipliers.
+  - `getNewQuality`. Returns the quality that the Product will have on the new day.
+  - `isAfterSale`. Returns information about whether a product is sold before or after the expiration date 
 
 ### New Product
-Для создания нового продукта необходимо создать новый класс в директории `Products` по аналогии с `RegularProduct.php`
-И, конечно, не забыть зарегистрировать в контейнере `ProductFactoryRegistry`.
+To create a new product, you need to create a new class in the `Products` directory by analogy with` RegularProduct.php`
+And, of course, remember to register the `ProductFactoryRegistry` in the container. 
 
 ```php
 $productFactoryRegistry->register(MyNewProduct::class);
