@@ -1,12 +1,10 @@
 ### Requirements
 
 **php**: 7.4
-Думаю, однако, что и на 7.1 отработает
-
 
 ### Usage
 
-Пример использование описан в файле texttest\_fixture.php
+Example in file texttest\_fixture.php
 
 ```php
 <?php
@@ -39,15 +37,15 @@ $app = new App($items, $productFactory);
 
 ### Tests
 
-Можно просто запустить `phpunit`
-Ну или как-то так
+`phpunit`
+
 `php composer.phar run-script test`
 `php composer.phar run-script tests`
 `php composer.phar run-script test-coverage`
 
 ### Description
 
-Это тестовое задание для  [Gilmon](https://gilmon.ru).
+Test  [Gilmon](https://gilmon.ru).
 Это было весело, но заняло немного больше времени, чем я планировал.
 В работе были применены следующие паттерны:
 
