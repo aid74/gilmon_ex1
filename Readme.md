@@ -81,4 +81,3 @@ $app = new App($items, $productFactory);
 ```php
 $productFactoryRegistry->register(MyNewProduct::class);
 ```
-
